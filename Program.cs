@@ -31,7 +31,16 @@ namespace ConsoleApp54
             {
                 if (nobeldijasok.Count(n => n.OrszagKod == orszagKod) == 1)
                 {
-                    Console.WriteLine();
+                    foreach (var tudos in nobeldijasok)
+                    {
+                        if (orszagKod == tudos.OrszagKod)
+                        {
+                            Console.WriteLine(tudos.Ev);
+                            Console.WriteLine(tudos.Nev);
+                            Console.WriteLine(tudos.SzuletesHalalozas);
+                            Console.WriteLine(tudos.OrszagKod);
+                        }
+                    }
                 }
             }
             else
