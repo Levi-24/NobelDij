@@ -26,24 +26,37 @@ namespace ConsoleApp54
 
             Console.Write("5.Feladat: Kérem adja meg egy ország kódját: ");
             string orszagKod = Console.ReadLine();
-
-            int count = 0;
-            if (nobeldijasok.Any(n => n.OrszagKod == orszagKod))
+            var f5 = nobeldijasok.Where(n => n.OrszagKod == orszagKod).ToList();
+            if (f5.Count == 0) Console.WriteLine("\tA megadott országból nem volt díjazott!");
+            else if (f5.Count == 1)
             {
-                foreach (var tudos in nobeldijasok)
-                {
-                    if (orszagKod == tudos.OrszagKod && nobeldijasok.Count(n => n.OrszagKod == orszagKod) == 1)
-                    {
-                        Console.WriteLine(tudos.Nev);
-                        Console.WriteLine(tudos.Ev);
-                        Console.WriteLine(tudos.SzuletesHalalozasStr);
-                        Console.WriteLine(tudos.OrszagKod);
-                    }
-                    else if(orszagKod == tudos.OrszagKod) count++;
-                }
+                Console.WriteLine("\tMegadott ország díjazottja:");
+                Console.WriteLine($"\tNév: {f5[0].Nev}");
+                Console.WriteLine($"\tÉv: {f5[0].Ev}");
+                Console.WriteLine($"\tSzuletés-Halálozás: {f5[0].SzuletesHalalozasStr}");
             }
-            else Console.WriteLine("A megadott országból nem volt díjazott!");
-            Console.WriteLine($"A megadott országból {count}db díjazott tudós volt.");
+            else
+            {
+                f5.Count();
+            }
+
+
+            //int count = 0;
+            //if (nobeldijasok.Any(n => n.OrszagKod == orszagKod))
+            //{
+            //    foreach (var tudos in nobeldijasok)
+            //    {
+            //        if (orszagKod == tudos.OrszagKod && nobeldijasok.Count(n => n.OrszagKod == orszagKod) == 1)
+            //        {
+            //            Console.WriteLine(tudos.Nev);
+            //            Console.WriteLine(tudos.Ev);
+            //            Console.WriteLine(tudos.SzuletesHalalozasStr);
+            //        }
+            //        else if(orszagKod == tudos.OrszagKod) count++;
+            //    }
+            //}
+            //else Console.WriteLine("A megadott országból nem volt díjazott!");
+            //Console.WriteLine($"A megadott országból {count}db díjazott tudós volt.");
         }
     }
 }
