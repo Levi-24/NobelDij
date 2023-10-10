@@ -10,7 +10,7 @@ namespace ConsoleApp54
     {
         static void Main(string[] args)
         {
-            var nobeldijasok = new List<Tudos>();
+            List<Tudos> nobeldijasok = new();
             using StreamReader sr = new StreamReader(
                 path: @"..\..\..\src\orvosi_nobeldijak.txt",
                 Encoding.UTF8
@@ -27,26 +27,23 @@ namespace ConsoleApp54
             Console.Write("5.Feladat: Kérem adja meg egy ország kódját: ");
             string orszagKod = Console.ReadLine();
 
+            int count = 0;
             if (nobeldijasok.Any(n => n.OrszagKod == orszagKod))
             {
-                if (nobeldijasok.Count(n => n.OrszagKod == orszagKod) == 1)
+                foreach (var tudos in nobeldijasok)
                 {
-                    foreach (var tudos in nobeldijasok)
+                    if (orszagKod == tudos.OrszagKod && nobeldijasok.Count(n => n.OrszagKod == orszagKod) == 1)
                     {
-                        if (orszagKod == tudos.OrszagKod)
-                        {
-                            Console.WriteLine(tudos.Ev);
-                            Console.WriteLine(tudos.Nev);
-                            Console.WriteLine(tudos.SzuletesHalalozas);
-                            Console.WriteLine(tudos.OrszagKod);
-                        }
+                        Console.WriteLine(tudos.Nev);
+                        Console.WriteLine(tudos.Ev);
+                        Console.WriteLine(tudos.SzuletesHalalozasStr);
+                        Console.WriteLine(tudos.OrszagKod);
                     }
+                    else if(orszagKod == tudos.OrszagKod) count++;
                 }
             }
-            else
-            {
-                Console.WriteLine("A megadott országból nem volt díjazott!");
-            }
+            else Console.WriteLine("A megadott országból nem volt díjazott!");
+            Console.WriteLine($"A megadott országból {count}db díjazott tudós volt.");
         }
     }
 }
